@@ -1,0 +1,222 @@
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Tangerine">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script>
+  	function formvalidate(f1){
+  		var em=f1.email.value;
+  		var p=f1.psw.value;
+  		var cp=f1.cpsw.value;
+  		var filterem1=/^([a-zA-Z0-9_\.\-])+(@iitk.ac.in)$/ ;
+		var filterem2 = /^([a-zA-Z0-9_\.\-])+(@gmail.com)$/ ;
+		var filterem3= /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
+  		if(!(filterem1.test(em) || filterem2.test(em))){
+  			myFunction();
+  			return false;
+  		}
+  		if(!(p===cp && filterem3.test(p))){
+  			myFunction1();
+  			return false;
+  		}
+		
+		return true;
+  	}
+  </script>
+  <script>
+function myFunction() {
+    var x = document.getElementById("snackbar");
+    x.className = "show";
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+}
+</script>
+<script>
+function myFunction1() {
+    var x = document.getElementById("snackbar1");
+    x.className = "show";
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+}
+</script>
+
+<style>
+.icon {
+    padding: 10px;
+    background: dodgerblue;
+    color: white;
+    min-width: 50px;
+    text-align: center;
+}
+.input-container {
+    display: -ms-flexbox; /* IE10 */
+    display: flex;
+    width: 100%;
+    margin-bottom: 15px;
+}
+.input-field {
+    width: 100%;
+    padding: 10px;
+    outline: none;
+}
+.input-field:focus {
+    border: 2px solid dodgerblue;
+}
+input[type=submit]{
+ background-color: dodgerblue;
+    color: white;
+    padding: 15px 20px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    opacity: 0.9;
+}
+body{
+background-color: #f2f2f2;
+letter-spacing: 2px;
+}
+input[type=submit]:hover{
+opaity:0.5;
+}
+ 
+.special{
+       font-family: 'Tangerine', serif;
+        font-size: 48px;
+		text-align: center;
+		padding : 25px;
+}
+.form{
+  position: relative;
+  z-index: 1;
+  background: white;
+  width: 50%;
+  margin: 0 auto 100px;
+  padding: 45px;
+  text-align: left;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+.navbar{
+  background-color: rgb(153,217,234);
+  color: white;
+  z-index: 2;
+  width: 100%;
+   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+   text-align: center;
+   padding-top: 0px;
+   padding-bottom: 12px;
+   margin : 7px auto ;
+   font-size: 30px;
+   }
+#snackbar {
+    visibility: hidden;
+    min-width: 250px;
+    margin-left: -125px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    border-radius: 2px;
+    padding: 16px;
+    position: fixed;
+    z-index: 1;
+    left: 50%;
+    bottom: 30px;
+    font-size: 17px;
+}
+#snackbar.show {
+    visibility: visible;
+    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+#snackbar1 {
+    visibility: hidden;
+    min-width: 250px;
+    margin: auto;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    border-radius: 2px;
+    padding: 16px;
+    position: fixed;
+    z-index: 1;
+    left: 50%;
+    bottom: 30px;
+    font-size: 17px;
+}
+#snackbar1.show {
+    visibility: visible;
+    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+#snackbar2 {
+    visibility: hidden;
+    min-width: 250px;
+    margin-left: -125px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    border-radius: 2px;
+    padding: 16px;
+    position: fixed;
+    z-index: 1;
+    left: 50%;
+    bottom: 30px;
+    font-size: 17px;
+}
+#snackbar2.show {
+    visibility: visible;
+    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+@-webkit-keyframes fadein {
+    from {bottom: 0; opacity: 0;} 
+    to {bottom: 30px; opacity: 1;}
+}
+@keyframes fadein {
+    from {bottom: 0; opacity: 0;}
+    to {bottom: 30px; opacity: 1;}
+}
+@-webkit-keyframes fadeout {
+    from {bottom: 30px; opacity: 1;} 
+    to {bottom: 0; opacity: 0;}
+}
+@keyframes fadeout {
+    from {bottom: 30px; opacity: 1;}
+    to {bottom: 0; opacity: 0;}
+}
+</style>
+
+</head>
+<body>
+<div class="navbar">
+	<div class="container-fluid">
+<div class="navbar-header">
+      <a class="navbar-brand" href="login.html" style="padding: 0px" ><img src="icon.png" style="width: 80px;height: 63px;display: inline-block;">LUNCHBOX</a>
+    </div></div>
+</div>
+<div class="special"></div>
+<div class="form">
+ <h1>Register</h1>
+    <p>Please fill in this form to create an account.</p>
+    <hr>
+<form method="POST" name="f1" onsubmit="return formvalidate(f1);" action="register.php" >
+<div class="input-container">
+    <i class="fa fa-envelope icon"></i>
+    <input class="input-field" type="text" placeholder="Email" name="email" required>
+  </div>
+  <div class="input-container">
+    <i class="fa fa-key icon"></i>
+    <input class="input-field" type="password" placeholder="Password" name="psw" required></div>
+    <div class="input-container">
+    <i class="fa fa-key icon"></i>
+    <input class="input-field" type="password" placeholder="Confirm Password" name="cpsw" required></div>
+<input type="Submit" value="REGISTER" style="font-style:italic;" class="btn btn-info" name="Submit"><br>
+</form>
+<p class="message">Already registered? <a href="login.html">Login</a></p>
+<div id="snackbar">NOT A VALID IITK MAIL</div>
+<div id="snackbar1">Either Password Didn't Match <br> or it doesn't consist of 6 or more characters <br>or don't contain eiher digits,alphabets,special character.</div>
+
+</div>
+</body>
+</html>
