@@ -1,8 +1,7 @@
 <?php
  session_start();
  
- if($_SESSION['email']!="rajkumar@iitk.ac.in")
- {header("Location:login.html");}
+ 
 ?>
  <html>
  <head>
@@ -84,15 +83,7 @@
   background-color: #4CAF50;
   color: white;
 }
-.form input[type=submit]{
- cursor : pointer;
- border-radius: 4px;
- background-color:#4CAF50;
- text-align: center;
-}
-input[type=submit]:hover{
-background-color: #45a049;
-}
+
 /* input modal */
 .container input[type=text]{
 	margin: 15px 15% 5px 15%;
@@ -101,18 +92,11 @@ background-color: #45a049;
 }
  
  .container input[type=number]
- {
+{
 	 margin: 15px 15% 5px 15%;
 	max-width: 300px;
 	text-align: center;
- }
- 
- .container input[type=submit],cancelbtn
- {
-	  margin: 15px 20px 5px 15%;
-	  text-align: center;
-	  max-width: 300px;
- }
+}
 /* The Modal (background) */
 .modal {
 	dispaly: auto;
@@ -178,7 +162,7 @@ background-color: #45a049;
   <a class="active" href="admin.php">PENDING ORDERS</a>
   
   <a href="admin_profile.php">PROFILE</a>
-  <a href="logout.php">LOGOUT</a>
+  <a href="vendor_logout.php">LOGOUT</a>
 </div>
 <br><br><br><br>
 <div class="container">
@@ -194,16 +178,16 @@ background-color: #45a049;
  <th>Item</th>
  <th>Quantity</th>
  <th>Amount</th>
- <th>Confirm?</th>
- <th>Cancel?</th>
+ <th>Confirm</th>
+ <th>Cancel</th>
  </tr>
  <tr ng-repeat="y in x" class="tr">
   <td>{{y.email}}</td>
   <td>{{y.item}}</td>
   <td>{{y.qty}}</td>
   <td>{{y.amt}}</td>
-  <td><button ng-click="confirm(y.uid,y.email,y.item,y.qty)" class="btn-success">Confirm</button></td>
-  <td><button ng-click="cancel(y.uid,y.email,y.item,y.qty)" class="btn-danger">Cancel</button></td>
+  <td><button ng-click="confirm(y.uid,y.email,y.item,y.qty,y.amt)" class="btn-success">Confirm</button></td>
+  <td><button ng-click="cancel(y.uid,y.email,y.item,y.qty,y.amt)" class="btn-danger">Cancel</button></td>
  </tr>
  </table>
  
@@ -214,14 +198,14 @@ background-color: #45a049;
  <input type="text" name="email" ng-model="email" >
  <input type="text" name="item" ng-model="item" >
  <input type="text" name="qty" ng-model="qty" >
- 
+ <input type="text" name="amount" ng-model="amt">
  </form>
  <form id="form1" action="cancel.php" method="post" style="display:none;">
  <input type="text" name="uid1" ng-model="uniqid1" >
  <input type="text" name="email1" ng-model="email1" >
  <input type="text" name="item1" ng-model="item1" >
  <input type="text" name="qty1" ng-model="qty1" >
- 
+ <input type="text" name="amount" ng-model="amt1">
  </form>
  
   </div> </div></div>
@@ -244,16 +228,18 @@ app.controller('customersCtrl',function($scope, $http) {
    .then(function (response) {$scope.names = response.data;});};
     var cnt1=0;
 	var cnt2=0;
-	$scope.confirm= function(a,b,c,d)
+	$scope.confirm= function(a,b,c,d,e)
 	{
+		$scope.amt=e;
 		$scope.uniqid=a;
 		$scope.email=b;
 		$scope.item=c;
 		$scope.qty=d;
 		cnt1=1;
 	}
-	$scope.cancel= function(a,b,c,d)
+	$scope.cancel= function(a,b,c,d,e)
 	{
+		$scope.amt1=e;
 		$scope.uniqid1=a;
 		$scope.email1=b;
 		$scope.item1=c;

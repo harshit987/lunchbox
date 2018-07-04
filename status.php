@@ -1,7 +1,6 @@
 <?php 
 session_start();
-if(!isset($_SESSION['email']) or $_SESSION["email"]==='rajkumar@iitk.ac.in')
-{header("Location: login.html");}
+
 //$email=$_SESSION["email"];
 ?>
 
@@ -78,7 +77,7 @@ if(!isset($_SESSION['email']) or $_SESSION["email"]==='rajkumar@iitk.ac.in')
 <div class="container" >
 
 <div ng-app="myapp" ng-controller="ctrl">
-<strong><h2><p ng-show="plate.length != 0">CURRENT ORDER:</p></h2></strong><br><br>
+<strong><h2><p ng-show="plate.length != 0">Your Plate:</p></h2></strong><br><br>
 <table class="table" ng-show="plate.length != 0">
 <tr>
 <th>ID</th>

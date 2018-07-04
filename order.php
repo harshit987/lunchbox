@@ -9,13 +9,13 @@ $qt=mysqli_real_escape_string($conn,$_POST['qty']);
 $amt=mysqli_real_escape_string($conn,$_POST['amount']);
 $item=mysqli_real_escape_string($conn,$_POST['item']);
 $canteen=mysqli_real_escape_string($conn,$_POST['canteen']);
-$array = explode("-",$canteen);
+$id=mysqli_real_escape_string($conn,$_POST['cid']);
+$p_idx="p".$id;
 if(!isset($_SESSION['uid'])){
 $_SESSION['uid']=uniqid();
 }
-echo $_SESSION['uid'];
-$id=$array[1];
-$p_idx="p".$id;
+
+
 $_SESSION['item']=$item;
 date_default_timezone_set("Asia/Kolkata");
 $time=date('h:i:sa');
@@ -33,5 +33,6 @@ if($row[$p_idx]*$qt==$amt)
 	else
 	   echo "inserted";
 	}
+	header('Location: ordernow.php');
 ?>
 

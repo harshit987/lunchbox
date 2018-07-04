@@ -7,7 +7,7 @@ header("Content-Type: application/json; charset=UTF-8");
   if($conn->connect_error)
 	 die($conn->connect_error);
   
-  $sql="select * from orders where status=0 order by millisec ASC,uid";/*add condition for each canteen*/
+  $sql="select * from orders where status=0 and canteen='".$_SESSION['canteen']."' order by millisec ASC,uid";/*add condition for each canteen*/
   $result=$conn->query($sql);
    if($conn->query($sql)===FALSE)
    {

@@ -1,14 +1,9 @@
 <?php
 session_start();
-if($_SESSION['email']!="rajkumar@iitk.ac.in")
-{header("Location:login.html");}
-
-
 require 'connection.php';
 $item=mysqli_real_escape_string($conn,$_POST['item']);
 $canteen=$_SESSION['canteen'];
-$arr=explode('-',$canteen);
-$p_idx="p".$arr[1];
+$p_idx='p'.$_SESSION['id'];
 $price=mysqli_real_escape_string($conn,$_POST['price']);
 if($_POST['change']==='ADD IN THE MENU'){
 $query="select * from food_list where name='$item'";
@@ -37,7 +32,7 @@ if(!$conn->query($sql1))
 }
 else{
 	
-	//header('Location: admin_profile.php');
+	header('Location: admin_profile.php');
 }
 }
 }

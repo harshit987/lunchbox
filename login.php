@@ -25,10 +25,7 @@
 			$flag=1;
 		   $_SESSION["email"]=$email;
            $_SESSION["psw"]=$psw;
-		   if($row["email"]==='rajkumar@iitk.ac.in')
-		   header("Location: amt_add_remove.php");
-	       else/*remove it*/
-		    header("Location: user.php");
+		   header('Location: user.php');
 	     }
 	  
       }

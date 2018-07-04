@@ -1,7 +1,6 @@
 <?php
 session_start();
-if($_SESSION['email']!="rajkumar@iitk.ac.in")
-{header("Location:login.html");}
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -117,7 +116,7 @@ if($_SESSION['email']!="rajkumar@iitk.ac.in")
   <a href="admin.php">PENDING ORDERS</a>
   
   <a href="admin_profile.php">PROFILE</a>
-  <a href="logout.php">LOGOUT</a>
+  <a href="vendor_logout.php">LOGOUT</a>
 </div>
 
 <br>

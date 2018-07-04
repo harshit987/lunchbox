@@ -1,6 +1,6 @@
 <?php
 session_start();
-$_SESSION['canteen']='hall-1';
+
  include_once 'connection.php';
  $email=mysqli_real_escape_string($conn,$_POST['email']);
  $item=mysqli_real_escape_string($conn,$_POST['item']);
@@ -8,7 +8,9 @@ $_SESSION['canteen']='hall-1';
  $qty= mysqli_real_escape_string($conn,$_POST['qty']);;
  $status=-3;
  $uid=md5(uniqid());
- $sql="select amount from amount_db where email=?";
+ $cid='canteen'.$_SESSION['id'];
+ 
+ $sql="select $cid,amount from amount_db where email=?";
   if(!$stmt=$conn->prepare($sql)){
 	  echo "prepare failed: (".$mysqli->errno . ") ".$mysqli->error;
   }
@@ -17,6 +19,7 @@ $_SESSION['canteen']='hall-1';
 		 echo "binding failed".$stmt.error;
 	 }
 	 else{ 
+	   
 		 $stmt->execute();
 		 $result = $stmt->get_result();
 		 $stmt->close();
@@ -26,8 +29,9 @@ $_SESSION['canteen']='hall-1';
 		 $day=date('l');
 		 $time=date('h:i:sa');
 		 $millisec=date('U');
-	     $new=$rs['amount']+$amt;
-	     $sql1="update amount_db set amount='".$new."' where email='".$email."'";
+	     $new=$rs[$cid]+$amt;
+		 $new_total=$rs['amount']+$amt;
+	     $sql1="update amount_db set $cid='$new',amount='$new_total' where email='".$email."'";
 	     if($conn->query($sql1)===TRUE)
 	     {$_SESSION['msgdone']="LAST TRANSACTION: amount added in $email at ".date('h:i:sa');
          $sql2="insert into orders values('$day','$time','$uid','$email','$item','$qty','$amt','-3','".$_SESSION["canteen"]."','$millisec')";

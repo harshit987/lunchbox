@@ -1,7 +1,5 @@
 <?php 
 session_start();
-if(!isset($_SESSION['email']) or $_SESSION["email"]==='rajkumar@iitk.ac.in')
-{header("Location: login.html");}
 //$email=$_SESSION["email"];
 ?>
 
@@ -21,12 +19,7 @@ if(!isset($_SESSION['email']) or $_SESSION["email"]==='rajkumar@iitk.ac.in')
 body{
 	font-family: font-family: Arial, Helvetica, sans-serif;
 }
-#id11{
-	width:0px;
-	height:0px;
-	visibilty: hidden;
-}
- 
+
 .card-body {
 	height:35px;
 	border-radius:50px;
@@ -34,17 +27,7 @@ body{
 	 box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.1), 0 5px 5px 0 rgba(0, 0, 0, 0.1);
 }
  
- .form{
-  position: relative;
-   width: 40%;
-  z-index: 1;
-  background: white;
-  
-  margin: 50px auto 100px;
-  padding: 45px;
-  text-align: left;
-  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
-}
+ 
 .topnav {
   overflow: hidden;
   background-color: #1ac6ff;
@@ -69,81 +52,7 @@ body{
   background-color: #4CAF50;
   color: white;
 }
-.form input[type=submit]{
- cursor : pointer;
- border-radius: 4px;
- background-color:#4CAF50;
- text-align: center;
-}
-input[type=submit]:hover{
-background-color: #45a049;
-}
-/* input modal */
-.container input[type=text]{
-	margin: 15px 15% 5px 15%;
-	max-width: 300px;
-	text-align: center;
-}
- 
- .container input[type=number]
- {
-	 margin: 15px 15% 5px 15%;
-	max-width: 300px;
-	text-align: center;
- }
- 
- .container input[type=submit],cancelbtn
- {
-	  margin: 15px 20px 5px 15%;
-	  text-align: center;
-	  max-width: 300px;
- }
-/* The Modal (background) */
-.modal {
-	dispaly: auto;
-	position:fixed;
-	z-index: 1;
-	left: 0;
-	top: 0;
-	width: 100%;
-	height: 100%;
-	overflow: auto;
-	background-color: rgb(0,0,0);
-	background-color: rgb(0,0,0,0.4);
-	padding-top: 120px;
-}
-/* Modal Content/Box */
-.modal-content {
-    background-color: #fefefe;
-    margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
-    border: 1px solid #888;
-    width: 50%; /* Could be more or less, depending on screen size */
-}
-/* The cancel Button (x) */
-/* Add Zoom Animation */
-.animate {
-    -webkit-animation: animatezoom 0.6s;
-    animation: animatezoom 0.6s
-}
-@-webkit-keyframes animatezoom {
-    from {-webkit-transform: scale(0)} 
-    to {-webkit-transform: scale(1)}
-}
-    
-@keyframes animatezoom {
-    from {transform: scale(0)} 
-    to {transform: scale(1)}
-}
-/* Change styles for span and cancel button on extra small screens */
-@media screen and (max-width: 300px) {
-    span.psw {
-       display: block;
-       float: none;
-    }
-    .cancelbtn {
-       width: 100%;
-    }
-}
+
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
 </head>
@@ -167,7 +76,7 @@ background-color: #45a049;
 </div>
 <div class="container">
 <?php
-$_SESSION['email']='hakumar@iitk.ac.in';
+
 $conn=mysqli_connect("localhost","root","","thelunchbox");
   if($conn->connect_error)
 	 die($conn->connect_error);
@@ -190,9 +99,9 @@ $conn=mysqli_connect("localhost","root","","thelunchbox");
 
 
 
-    <div class="card" style="width:50%;margin:auto;" ng-repeat="x in names2">
+    <div class="card" style="width:75%;margin:auto;" ng-repeat="x in names2">
 	<div class="card-body">
-	<pre class="bg-info" style="font-family:'Courier New', Courier, monospace;"><strong class="text-info">{{x.item}}   quantity: {{x.qty}} </strong>      <small>ordered at <strong>{{x.time}}</strong> from <strong>{{x.way}}</strong></small>
+	<pre class="bg-info" style="font-family:'Courier New', Courier, monospace;"><strong class="text-info">{{x.item}}   quantity: {{x.qty}} </strong>      <small>ordered at <strong>{{x.time}}</strong> from <strong class="txt-danger">{{x.way}}</strong></small>
 <strong class="text-danger">amount : {{x.amt}}/-</str>              <small><strong>STATUS: <kbd>{{x.status}}</kbd></strong></small>
     </pre></div>
 	

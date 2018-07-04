@@ -1,13 +1,13 @@
 <?php 
-session_start();
-if(!isset($_SESSION["email"]) or !isset($_SESSION['psw']))
-{
-	header("Location:login.html");
-}
-else if($_SESSION["email"]==='rajkumar@iitk.ac.in')
-{
-	header('Location:amt_add_remove.php');
-}
+//session_start();
+//if(!isset($_SESSION["email"]) or !isset($_SESSION['psw']))
+//{
+ // header("Location:login.html");
+//}
+//else if($_SESSION["email"]==='rajkumar@iitk.ac.in')
+//{
+ // header('Location:amt_add_remove.php');
+//}
 //$email=$_SESSION["email"];
 ?>
 
@@ -23,37 +23,70 @@ else if($_SESSION["email"]==='rajkumar@iitk.ac.in')
   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
   
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+
+
   <script>
-  /*function validate(){
+  function validate(){
     var item=document.getElementById('id11').value;
-	var qty=document.getElementById('id12').value;
-	var amt=document.getElementById('id13').value;
-	var filter1=/^[a-zA-Z]+$/;
-	var filter2=/^[0-9]+$/;
-	if(!filter1.test(item))
-	{alert('invalid'); return false;}
+  var qty=document.getElementById('id12').value;
+  var amt=document.getElementById('id13').value;
+  var filter1=/^[a-z A-Z]+$/;
+  var filter2=/^[0-9]+$/;
+  if(!filter1.test(item))
+  {alert('invalid item'); return false;}
     if(!filter2.test(qty))
-	{alert('invalid'); return false;}
+  {alert('invalid quantity'); return false;}
     if(!filter2.test(amt))
-    {alert('invalid'); return false;}
-    return true;
-  }*/
+    {alert('invalid amount'); return false;}
+  }
   </script>
 <style>
-#id11. #id12{
-	width:0px;
-	height:0px;
-	visibilty: hidden;
+#snackbar {
+    visibility: hidden;
+    min-width: 250px;
+    margin-left: -125px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    border-radius: 2px;
+    padding: 16px;
+    position: fixed;
+    z-index: 1;
+    left: 50%;
+    bottom: 30px;
+    font-size: 17px;
+}
+
+#snackbar.show {
+    visibility: visible;
+    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+.card {
+    margin: 12px;
+    padding:12px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    width: 100%;
+}
+
+.card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+#id11. #id12. #cid11{
+  width:0px;
+  height:0px;
+  visibilty: hidden;
 }
  
-
 .r1{
 width: 25%;
 }
 .r2{
 width: 25%;
 }
- .form{
+ #form{
   position: relative;
    width: 40%;
   z-index: 1;
@@ -88,80 +121,40 @@ width: 25%;
   background-color: #4CAF50;
   color: white;
 }
-.form input[type=submit]{
- cursor : pointer;
- border-radius: 4px;
- background-color:#4CAF50;
- text-align: center;
-}
-input[type=submit]:hover{
-background-color: #45a049;
-}
+
+
 /* input modal */
-.container input[type=text]{
-	margin: 15px 15% 5px 15%;
-	max-width: 300px;
-	text-align: center;
-}
+
  
- .container input[type=number]
- {
-	 margin: 15px 15% 5px 15%;
-	max-width: 300px;
-	text-align: center;
- }
+
  
- .container input[type=submit],cancelbtn
- {
-	  margin: 15px 20px 5px 15%;
-	  text-align: center;
-	  max-width: 300px;
- }
 /* The Modal (background) */
 .modal {
-	display: auto;
-	position:fixed;
-	z-index: 1;
-	left: 0;
-	top: 0;
-	width: 100%;
-	height: 100%;
-	overflow: auto;
-	background-color: rgb(0,0,0);
-	background-color: rgb(0,0,0,0.4);
-	padding-top: 120px;
+  dispaly: auto;
+  position:fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+   
+  overflow: auto;
+  background-color: rgb(0,0,0);
+  background-color: rgb(0,0,0,0.4);
+
 }
 /* Modal Content/Box */
 .modal-content {
     background-color: #fefefe;
-    margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+   margin:auto;
+   margin-top:5%;
+      
     border: 1px solid #888;
     width: 50%; /* Could be more or less, depending on screen size */
+	
 }
-/* The cancel Button (x) */
-/* Add Zoom Animation */
-.animate {
-    -webkit-animation: animatezoom 0.6s;
-    animation: animatezoom 0.6s
-}
-@-webkit-keyframes animatezoom {
-    from {-webkit-transform: scale(0)} 
-    to {-webkit-transform: scale(1)}
-}
-    
-@keyframes animatezoom {
-    from {transform: scale(0)} 
-    to {transform: scale(1)}
-}
-/* Change styles for span and cancel button on extra small screens */
-@media screen and (max-width: 300px) {
-    span.psw {
-       display: block;
-       float: none;
-    }
-    .cancelbtn {
-       width: 100%;
-    }
+.form-group{
+	margin: 20px;
 }
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
@@ -187,7 +180,7 @@ background-color: #45a049;
 
 <div ng-app="myApp" ng-controller="customersCtrl">
 <p id="id"></p>
- <div class="form">
+ <div id="form">
  <div class="form-group has-feedback">
     <label class="control-label">SEARCH</label>
     <input type="text" ng-model="test" class="form-control" placeholder="item name">
@@ -195,30 +188,36 @@ background-color: #45a049;
 </div>
  </div>
  <div class="container">
-<table class="table">
+
+<div ng-repeat="x in names | filter : test" class="card">
   
-  <tr ng-repeat="x in names | filter : test" class="tr">
-    <td class="r1">{{x.name}}</td>
-    <td class="r1">{{x.category}}</td>
-	<td class="r2">{{ x.price }}</td>
-	
-	<td><button ng-click ="fun(x.name,x.price)" style="width:auto;">ADD TO PLATE</button>
-  </tr>
-</table>
+    <h3>{{x.name}}</h3>
+    <p><span ng-show="x.category !== ''">Category:{{x.category}}  &nbsp&nbsp&nbsp&nbsp</span><span ng-show="x.price !== 100000">Lowest Price:{{x.price}}</span></p>
+    <button  class="btn btn-primary" style="margin:2px;" ng-repeat="y in canteens" ng-click ="fun(x.name,x[y.fid],y.id,y.status,y.name)" style="width:auto;">{{y.name}}</button>
+
 </div>
- <div id="1" >
+<div id="snackbar"></div>
+</div>
+ <div id="1" class="modal">
      
-	  <div class="container">
-	  <form class="modal-content animate" name="f1" method="post" onsubmit="return validate();" action="order.php">
-	     Item Name:<input type="text" ng-model="nm" ng-disabled="nm"><input type="text" name="item" ng-model="nm" id="id11"><br>
-      Price :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" ng-model="pr"><input type="number" name="amount" ng-model="pr" id="id12"><br>
-		  Quantity:&nbsp;&nbsp;&nbsp; <input type="number" placeholder="quantity" min=1 ng-model="qt" ng-change="func(qt)"><input type="number" name="qty" ng-model="qt" id="id13"><br>
-		  Canteen: &nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="canteen">
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" value="ADD TO PLATE" id="sbmt" onclick="document.getElementById('1').style.display='none'">  
-        <button type="button" onclick="document.getElementById('1').style.display='none'"
-		class="cancelbtn">Cancel</button>	
-	</form>
-       </div>	
+    <div class="container">
+    <form class="modal-content animate" name="f1" method="post" onsubmit="return validate();" action="order.php">
+      <div class="form-group"><label for="id4">Canteen:</label><input type="text" ng-model="canteen" ng-disabled="true" class="form-control" id="id4"></div>
+	  <div class="form-group"><label for="id1">Item Name:</label><input type="text" ng-model="nm" ng-disabled="true" class="form-control" id="id1"></div>
+      <div class="form-group"><label for="id2">Price :</label><input type="text" id="id2" ng-model="pr" ng-disabled="true" class="form-control"></div>
+      <div class="form-group"><label for="id3">Quantity:</label><input type="number" id="id3" class="form-control" placeholder="quantity" min=1 ng-model="qt" ng-change="func(qt)"></div>
+      <div class="form-group"><input type="submit" class="btn-success" value="ORDER NOW" id="sbmt" onclick="document.getElementById('1').style.display='none'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	  <button  type="button" class="btn-danger" onclick="document.getElementById('1').style.display='none'">Cancel</button></div>
+	  
+	  <input type="text" name="item" ng-model="nm" id="id11" style="Display:none;" onchange="document.getElementById('sbmt').disabled=true;">
+	  <input type="text" name="amount" ng-model="pr" id="id12" style="Display:none;" onchange="document.getElementById('sbmt').disabled=true;">
+	  <input type="text" name="qty" ng-model="qt" id="id13" style="Display:none;" onchange="document.getElementById('sbmt').disabled=true;">
+	  <input type="text" name="cid" ng-model="cid" id="cid11" style="Display:none;" onchange="document.getElementById('sbmt').disabled=true;">
+	  <input type="text" name="canteen" ng-model="canteen" style="display:none;" onchange="document.getElementById('sbmt').disabled=true;">
+      
+       
+  </form>
+       </div> 
 
 </div>
 
@@ -243,23 +242,47 @@ window.onclick = function(event) {
 var app = angular.module('myApp', []);
 app.controller('customersCtrl', function($scope, $http) {
    $http.get("food_db.php")
-   .then(function (response) {$scope.names = response.data.records;},function(error){
+   .then(function (response) {$scope.names = response.data.records;
+    $scope.canteens = response.data.records2;},function(error){
    alert(failed);
    });
+   $scope.getdata=function(){ $http.get("food_db.php")
+   .then(function (response) {$scope.names = response.data.records;
+    $scope.canteens = response.data.records2;},function(error){
+   alert(failed);
+   });};
+   setInterval($scope.getdata,3000);
    $scope.func=function(qt){
       $scope.pr=parseInt(qt)*parseInt($scope.pr1);
    };
-   $scope.fun= function(p2,p1){
+   $scope.fun= function(p2,p1,id,status,name){
+    if(status==0){
+       var x=document.getElementById("snackbar");
+        x.innerHTML="This Canteen Is Closed At This Moment";
+         x.className = "show";
+        setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+        return false;
+    }
+    if(p1==0){
+       var x=document.getElementById("snackbar");
+        x.innerHTML="This Item Is Not Available At This Canteen";
+         x.className = "show";
+        setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+        return false;
+    }
+    else{
     document.getElementById('1').style.display='block';
+    $scope.canteen=name;
+	$scope.cid=id;
     $scope.nm = p2;
     $scope.qt=1;
     $scope.pr =parseInt(p1);
     $scope.pr1=parseInt(p1);
+  }
    };
 });
 </script>
 <script>
-
 </script>
 </body>
 </html>

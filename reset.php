@@ -1,3 +1,9 @@
+<?php
+session_start();
+if(!(($_SERVER['REQUEST_METHOD']=='POST')&&($_SERVER['REQUEST_METHOD']=='GET'))){
+	header('location: login.html');
+}
+?>
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,31 +15,14 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script>
   	function formvalidate(f1){
-  		var em=f1.email.value;
   		var p=f1.psw.value;
   		var cp=f1.cpsw.value;
-  		var filterem1=/^([a-zA-Z0-9_\.\-])+(@iitk.ac.in)$/ ;
-		var filterem2 = /^([a-zA-Z0-9_\.\-])+(@gmail.com)$/ ;
-		var filterem3= /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
-  		if(!(filterem1.test(em) || filterem2.test(em))){
-  			myFunction();
-  			return false;
-  		}
-  		if(!(p===cp && filterem3.test(p))){
+  		if(!(p===cp)){
   			myFunction1();
   			return false;
   		}
-		
-		return true;
   	}
   </script>
-  <script>
-function myFunction() {
-    var x = document.getElementById("snackbar");
-    x.className = "show";
-    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
-}
-</script>
 <script>
 function myFunction1() {
     var x = document.getElementById("snackbar1");
@@ -61,6 +50,7 @@ function myFunction1() {
     padding: 10px;
     outline: none;
 }
+
 .input-field:focus {
     border: 2px solid dodgerblue;
 }
@@ -87,7 +77,11 @@ opaity:0.5;
 		text-align: center;
 		padding : 25px;
 }
+#1{
+
+}
 .form{
+  
   position: relative;
   z-index: 1;
   background: white;
@@ -109,7 +103,8 @@ opaity:0.5;
    margin : 7px auto ;
    font-size: 30px;
    }
-#snackbar {
+
+#snackbar1 {
     visibility: hidden;
     min-width: 250px;
     margin-left: -125px;
@@ -124,63 +119,28 @@ opaity:0.5;
     bottom: 30px;
     font-size: 17px;
 }
-#snackbar.show {
-    visibility: visible;
-    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
-    animation: fadein 0.5s, fadeout 0.5s 2.5s;
-}
-#snackbar1 {
-    visibility: hidden;
-    min-width: 250px;
-    margin: auto;
-    background-color: #333;
-    color: #fff;
-    text-align: center;
-    border-radius: 2px;
-    padding: 16px;
-    position: fixed;
-    z-index: 1;
-    left: 50%;
-    bottom: 30px;
-    font-size: 17px;
-}
+
 #snackbar1.show {
     visibility: visible;
     -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
     animation: fadein 0.5s, fadeout 0.5s 2.5s;
 }
-#snackbar2 {
-    visibility: hidden;
-    min-width: 250px;
-    margin-left: -125px;
-    background-color: #333;
-    color: #fff;
-    text-align: center;
-    border-radius: 2px;
-    padding: 16px;
-    position: fixed;
-    z-index: 1;
-    left: 50%;
-    bottom: 30px;
-    font-size: 17px;
-}
-#snackbar2.show {
-    visibility: visible;
-    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
-    animation: fadein 0.5s, fadeout 0.5s 2.5s;
-}
+
 @-webkit-keyframes fadein {
     from {bottom: 0; opacity: 0;} 
     to {bottom: 30px; opacity: 1;}
 }
+
 @keyframes fadein {
     from {bottom: 0; opacity: 0;}
     to {bottom: 30px; opacity: 1;}
 }
+
 @-webkit-keyframes fadeout {
     from {bottom: 30px; opacity: 1;} 
     to {bottom: 0; opacity: 0;}
 }
+
 @keyframes fadeout {
     from {bottom: 30px; opacity: 1;}
     to {bottom: 0; opacity: 0;}
@@ -196,26 +156,66 @@ opaity:0.5;
     </div></div>
 </div>
 <div class="special"></div>
-<div class="form">
-<form method="POST" name="f1" onsubmit="return formvalidate(f1);" action="register.php" >
-<p><h2>Customer-Registration</h2></p>
-<p>Please fill the form to be able to order food from registered canteens online</p><hr>
-<div class="input-container">
-    <i class="fa fa-envelope icon"></i>
-    <input class="input-field" type="text" placeholder="Email" name="email" required>
-  </div>
+<div id="1" class="form">
+ <h1>RESET PASSWORD</h1>
+    <p>Please fill in this form to reset password.</p>
+    <hr>
+<form method="POST" name="f1" onsubmit="return formvalidate(f1);" action="reset.php" >
   <div class="input-container">
     <i class="fa fa-key icon"></i>
-    <input class="input-field" type="password" placeholder="Password" name="psw" required></div>
+    <input class="input-field" type="password" placeholder="New Password" name="psw" required></div>
     <div class="input-container">
     <i class="fa fa-key icon"></i>
     <input class="input-field" type="password" placeholder="Confirm Password" name="cpsw" required></div>
-<input type="Submit" value="REGISTER" style="font-style:italic;" class="btn btn-info" name="Submit"><br>
+<input type="Submit" value="RESET" style="font-style:italic;" class="btn btn-info" name="Submit"><br>
 </form>
-<p class="message">Already registered? <a href="login.html">Login</a></p>
-<div id="snackbar">NOT A VALID IITK MAIL</div>
-<div id="snackbar1">Either Password Didn't Match <br> or it doesn't consist of 6 or more characters <br>or don't contain eiher digits,alphabets,special character.</div>
-
+<p class="message">wanna try? <a href="login.html">Login</a></p>
+<div id="snackbar1">Password Did Not Match</div>
 </div>
 </body>
 </html>
+<?php
+if(($_SERVER['REQUEST_METHOD']=='GET')&&(isset($_GET['uid']))){
+	$host='localhost';
+	$user='root';
+	$pwd='hello123';
+	$db='lunchbox';
+	$con=mysqli_connect($host,$user,$pwd,$db) or die("Unable to connect".mysqli_connect_error());
+	$id=$_GET['uid'];
+	$_SESSION['id1']=$id;
+	$sql="SELECT email from users where uniqueid='$id'";
+	$result =mysqli_query($con,$sql);
+	if(!(mysqli_num_rows($result)>0)){
+		echo 'Invalid Request';
+		echo "<script>
+			document.getElementById('1').style.display='none';
+		</script>";
+	} $con->close();
+}
+if(($_SERVER['REQUEST_METHOD']=='POST')&&(isset($_POST['psw']))){
+	$host='localhost';
+	$user='root';
+	$pwd='hello123';
+	$db='lunchbox';
+	$con=mysqli_connect($host,$user,$pwd,$db) or die("Unable to connect".mysqli_connect_error());
+	$npass=md5($_POST['psw']);
+	$id=$_SESSION['id1'];
+	$sql="SELECT email from users where uniqueid='$id' and active =1";
+	$result =mysqli_query($con,$sql);
+	echo '<script>
+			document.getElementById("1").style.display="none";
+		</script>';
+	if((mysqli_num_rows($result)>0)){
+		$sql2="UPDATE users set hashpass='$npass' where uniqueid='$id'" ;
+		if(mysqli_query($con,$sql2)){
+			echo "Password Has Been Updated"."<br>";
+			echo "<a href='login.html'>Login</a>";
+		}else echo "Error";
+		
+	}else{
+		echo "Invalid Request";
+	} $con->close();
+
+
+}
+?>

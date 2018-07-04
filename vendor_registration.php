@@ -9,34 +9,39 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script>
   	function formvalidate(f1){
+      var fn=f1.fname.value;
+      var ph=f1.phone.value;
   		var em=f1.email.value;
   		var p=f1.psw.value;
   		var cp=f1.cpsw.value;
-  		var filterem1=/^([a-zA-Z0-9_\.\-])+(@iitk.ac.in)$/ ;
-		var filterem2 = /^([a-zA-Z0-9_\.\-])+(@gmail.com)$/ ;
-		var filterem3= /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
-  		if(!(filterem1.test(em) || filterem2.test(em))){
-  			myFunction();
+      var erfn="Full Name Should only contain letter and spaces with Proper length";
+      var erph="Not a correct syntax of valid phone number";
+      var erem="Not a correct syntax of valid email address";
+      var erpasm="Password did not match";
+      var filterfn=/^([a-zA-Z]{1,} )*([a-zA-Z]{1,})$/;
+      var filterph=/[0-9]{10}/;
+  		var filterem=/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      if(!filterfn.test(fn)){
+        myFunction(erfn);
+        return false;
+      }if(!filterph.test(ph)){
+        myFunction(erph);
+        return false;
+      }
+  		if(!filterem.test(em)){
+  			myFunction(erem);
   			return false;
   		}
-  		if(!(p===cp && filterem3.test(p))){
-  			myFunction1();
+  		if(!(p===cp)){
+  			myFunction(erpasm);
   			return false;
   		}
-		
-		return true;
   	}
   </script>
   <script>
-function myFunction() {
+function myFunction(str) {
     var x = document.getElementById("snackbar");
-    x.className = "show";
-    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
-}
-</script>
-<script>
-function myFunction1() {
-    var x = document.getElementById("snackbar1");
+    x.innerHTML=str;
     x.className = "show";
     setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
 }
@@ -61,6 +66,7 @@ function myFunction1() {
     padding: 10px;
     outline: none;
 }
+
 .input-field:focus {
     border: 2px solid dodgerblue;
 }
@@ -124,63 +130,28 @@ opaity:0.5;
     bottom: 30px;
     font-size: 17px;
 }
+
 #snackbar.show {
     visibility: visible;
     -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
     animation: fadein 0.5s, fadeout 0.5s 2.5s;
 }
-#snackbar1 {
-    visibility: hidden;
-    min-width: 250px;
-    margin: auto;
-    background-color: #333;
-    color: #fff;
-    text-align: center;
-    border-radius: 2px;
-    padding: 16px;
-    position: fixed;
-    z-index: 1;
-    left: 50%;
-    bottom: 30px;
-    font-size: 17px;
-}
-#snackbar1.show {
-    visibility: visible;
-    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
-    animation: fadein 0.5s, fadeout 0.5s 2.5s;
-}
-#snackbar2 {
-    visibility: hidden;
-    min-width: 250px;
-    margin-left: -125px;
-    background-color: #333;
-    color: #fff;
-    text-align: center;
-    border-radius: 2px;
-    padding: 16px;
-    position: fixed;
-    z-index: 1;
-    left: 50%;
-    bottom: 30px;
-    font-size: 17px;
-}
-#snackbar2.show {
-    visibility: visible;
-    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
-    animation: fadein 0.5s, fadeout 0.5s 2.5s;
-}
+
 @-webkit-keyframes fadein {
     from {bottom: 0; opacity: 0;} 
     to {bottom: 30px; opacity: 1;}
 }
+
 @keyframes fadein {
     from {bottom: 0; opacity: 0;}
     to {bottom: 30px; opacity: 1;}
 }
+
 @-webkit-keyframes fadeout {
     from {bottom: 30px; opacity: 1;} 
     to {bottom: 0; opacity: 0;}
 }
+
 @keyframes fadeout {
     from {bottom: 30px; opacity: 1;}
     to {bottom: 0; opacity: 0;}
@@ -195,27 +166,65 @@ opaity:0.5;
       <a class="navbar-brand" href="login.html" style="padding: 0px" ><img src="icon.png" style="width: 80px;height: 63px;display: inline-block;">LUNCHBOX</a>
     </div></div>
 </div>
-<div class="special"></div>
-<div class="form">
-<form method="POST" name="f1" onsubmit="return formvalidate(f1);" action="register.php" >
-<p><h2>Customer-Registration</h2></p>
-<p>Please fill the form to be able to order food from registered canteens online</p><hr>
-<div class="input-container">
-    <i class="fa fa-envelope icon"></i>
-    <input class="input-field" type="text" placeholder="Email" name="email" required>
-  </div>
-  <div class="input-container">
-    <i class="fa fa-key icon"></i>
-    <input class="input-field" type="password" placeholder="Password" name="psw" required></div>
-    <div class="input-container">
-    <i class="fa fa-key icon"></i>
-    <input class="input-field" type="password" placeholder="Confirm Password" name="cpsw" required></div>
-<input type="Submit" value="REGISTER" style="font-style:italic;" class="btn btn-info" name="Submit"><br>
-</form>
-<p class="message">Already registered? <a href="login.html">Login</a></p>
-<div id="snackbar">NOT A VALID IITK MAIL</div>
-<div id="snackbar1">Either Password Didn't Match <br> or it doesn't consist of 6 or more characters <br>or don't contain eiher digits,alphabets,special character.</div>
-
-</div>
+<br><br><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 </body>
 </html>
+
+<?php
+ if(($_SERVER['REQUEST_METHOD']=='POST')&&(isset($_POST['psw']))){
+  $host='localhost';
+  $user='root';
+  $pwd='';
+  $db='thelunchbox';
+  $con=mysqli_connect($host,$user,$pwd,$db) or die("Unable to connect".mysqli_connect_error());
+  $fname=$_POST['fname'];
+  $cname=$_POST['cname'];
+  $ph=$_POST['phone'];
+  $emailid=$_POST['email'];
+  $npass=md5($_POST['psw']);
+  $uid=md5(uniqid());
+  $sql="SELECT name,status from canteens where status= -1 and name='$cname'";
+  $result =mysqli_query($con,$sql);
+  $sql1="SELECT name,status from canteens where status!= -1 and name='$cname'";
+  $result1 =mysqli_query($con,$sql1);
+  $c1=mysqli_num_rows($result);
+  $c2=mysqli_num_rows($result1);
+  
+  $result2=$con->query("select max(id) as 'max' from canteens");
+  $rs=$result2->fetch_array(MYSQLI_ASSOC);
+  $c3=$rs['max'];
+  $c3=$c3+1;
+  if(($c1>0)){
+    echo '<script>
+      document.getElementById("1").style.display="none";
+    </script>';
+    echo "Pending request has already been recieved.<br>";
+  }
+   else if(($c2>0)){
+    echo '<script>
+      document.getElementById("1").style.display="none";
+    </script>';
+    echo "Canteen already exist"."<br>";
+    echo"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='vendor_login.html'>Login</a>";
+  }
+  else{
+    $sql2="INSERT INTO canteens (id,uniqueid,name,vendor,pass,vendor_name,vendor_phone,status) VALUES ('$c3','$uid','$cname','$emailid','$npass','$fname','$ph',-1)";
+    //$result2=mysqli_query($con,$sql2);
+    echo '<script>
+      document.getElementById("1").style.display="none";
+    </script>';
+    if(mysqli_query($con,$sql2)){
+      echo "request has been sent to admin .<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Admin will soon contact you through email or phone ";
+    }
+    else{
+      echo "error".mysqli_error($con);
+    }
+
+
+  }
+  }
+  $con->close();
+
+
+?>

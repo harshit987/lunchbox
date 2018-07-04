@@ -1,7 +1,6 @@
 <?php 
 session_start();
-if(!isset($_SESSION['email']) or $_SESSION["email"]!=='rajkumar@iitk.ac.in')
-{header("Location: profile.php");}
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -75,7 +74,7 @@ if(!isset($_SESSION['email']) or $_SESSION["email"]!=='rajkumar@iitk.ac.in')
   <a href="admin.php">PENDING ORDERS</a>
   
   <a class="active" href="admin_profile.php">PROFILE</a>
-  <a href="logout.php">LOGOUT</a>
+  <a href="vendor_logout.php">LOGOUT</a>
   
 </div>
 
@@ -91,6 +90,8 @@ if(!isset($_SESSION['email']) or $_SESSION["email"]!=='rajkumar@iitk.ac.in')
 <br>
 <p class="data"><strong class="text-info"><?php
  echo "Vendor Name: ".$_SESSION['email'];
+ echo "<br>Canteen: ".$_SESSION['canteen'];
+ echo "<br>Phone no. : ".$_SESSION['vendor_phone']; 
  ?></strong></p><br><br><br><br><br><br><br><br><br><br><br><br>
  <h2>ADD FOOD IN THE MENU:</h2>
  <form action="add_food.php" method="post">

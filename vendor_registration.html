@@ -1,3 +1,4 @@
+
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,34 +10,39 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script>
   	function formvalidate(f1){
+      var fn=f1.fname.value;
+      var ph=f1.phone.value;
   		var em=f1.email.value;
   		var p=f1.psw.value;
   		var cp=f1.cpsw.value;
-  		var filterem1=/^([a-zA-Z0-9_\.\-])+(@iitk.ac.in)$/ ;
-		var filterem2 = /^([a-zA-Z0-9_\.\-])+(@gmail.com)$/ ;
-		var filterem3= /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
-  		if(!(filterem1.test(em) || filterem2.test(em))){
-  			myFunction();
+      var erfn="Full Name Should only contain letter and spaces with Proper length";
+      var erph="Not a correct syntax of valid phone number";
+      var erem="Not a correct syntax of valid email address";
+      var erpasm="Password did not match";
+      var filterfn=/^([a-zA-Z]{1,} )*([a-zA-Z]{1,})$/;
+      var filterph=/[0-9]{10}/;
+  		var filterem=/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      if(!filterfn.test(fn)){
+        myFunction(erfn);
+        return false;
+      }if(!filterph.test(ph)){
+        myFunction(erph);
+        return false;
+      }
+  		if(!filterem.test(em)){
+  			myFunction(erem);
   			return false;
   		}
-  		if(!(p===cp && filterem3.test(p))){
-  			myFunction1();
+  		if(!(p===cp)){
+  			myFunction(erpasm);
   			return false;
   		}
-		
-		return true;
   	}
   </script>
   <script>
-function myFunction() {
+function myFunction(str) {
     var x = document.getElementById("snackbar");
-    x.className = "show";
-    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
-}
-</script>
-<script>
-function myFunction1() {
-    var x = document.getElementById("snackbar1");
+    x.innerHTML=str;
     x.className = "show";
     setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
 }
@@ -61,6 +67,7 @@ function myFunction1() {
     padding: 10px;
     outline: none;
 }
+
 .input-field:focus {
     border: 2px solid dodgerblue;
 }
@@ -124,63 +131,28 @@ opaity:0.5;
     bottom: 30px;
     font-size: 17px;
 }
+
 #snackbar.show {
     visibility: visible;
     -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
     animation: fadein 0.5s, fadeout 0.5s 2.5s;
 }
-#snackbar1 {
-    visibility: hidden;
-    min-width: 250px;
-    margin: auto;
-    background-color: #333;
-    color: #fff;
-    text-align: center;
-    border-radius: 2px;
-    padding: 16px;
-    position: fixed;
-    z-index: 1;
-    left: 50%;
-    bottom: 30px;
-    font-size: 17px;
-}
-#snackbar1.show {
-    visibility: visible;
-    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
-    animation: fadein 0.5s, fadeout 0.5s 2.5s;
-}
-#snackbar2 {
-    visibility: hidden;
-    min-width: 250px;
-    margin-left: -125px;
-    background-color: #333;
-    color: #fff;
-    text-align: center;
-    border-radius: 2px;
-    padding: 16px;
-    position: fixed;
-    z-index: 1;
-    left: 50%;
-    bottom: 30px;
-    font-size: 17px;
-}
-#snackbar2.show {
-    visibility: visible;
-    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
-    animation: fadein 0.5s, fadeout 0.5s 2.5s;
-}
+
 @-webkit-keyframes fadein {
     from {bottom: 0; opacity: 0;} 
     to {bottom: 30px; opacity: 1;}
 }
+
 @keyframes fadein {
     from {bottom: 0; opacity: 0;}
     to {bottom: 30px; opacity: 1;}
 }
+
 @-webkit-keyframes fadeout {
     from {bottom: 30px; opacity: 1;} 
     to {bottom: 0; opacity: 0;}
 }
+
 @keyframes fadeout {
     from {bottom: 30px; opacity: 1;}
     to {bottom: 0; opacity: 0;}
@@ -196,10 +168,23 @@ opaity:0.5;
     </div></div>
 </div>
 <div class="special"></div>
-<div class="form">
-<form method="POST" name="f1" onsubmit="return formvalidate(f1);" action="register.php" >
-<p><h2>Customer-Registration</h2></p>
-<p>Please fill the form to be able to order food from registered canteens online</p><hr>
+<div class="form" id="1">
+ <h1>Vendor-Registration</h1>
+    <p>Please fill in this form to send an request to admin of Lunchbox to become a vendor.</p>
+    <hr>
+<form method="POST"  name="f1" onsubmit="return formvalidate(f1);" action="vendor_registration.php" >
+  <div class="input-container">
+    <i class="fa fa-user icon"></i>
+    <input class="input-field" type="text" placeholder="Full Name" name="fname" required>
+  </div>
+   <div class="input-container">
+    <i class="fa fa-cutlery icon"></i>
+    <input class="input-field" type="text" placeholder="Canteen Name" name="cname" required>
+  </div>
+  <div class="input-container">
+    <i class="fa fa-phone icon"></i>
+    <input class="input-field" type="text" placeholder="phone-no" name="phone" required>
+  </div>
 <div class="input-container">
     <i class="fa fa-envelope icon"></i>
     <input class="input-field" type="text" placeholder="Email" name="email" required>
@@ -212,10 +197,9 @@ opaity:0.5;
     <input class="input-field" type="password" placeholder="Confirm Password" name="cpsw" required></div>
 <input type="Submit" value="REGISTER" style="font-style:italic;" class="btn btn-info" name="Submit"><br>
 </form>
-<p class="message">Already registered? <a href="login.html">Login</a></p>
-<div id="snackbar">NOT A VALID IITK MAIL</div>
-<div id="snackbar1">Either Password Didn't Match <br> or it doesn't consist of 6 or more characters <br>or don't contain eiher digits,alphabets,special character.</div>
-
+<p class="message">Already registered? <a href="vendor_login.html">Login</a></p>
+<a href="forgot.html">forgot password</a>
+<div id="snackbar"></div>
 </div>
 </body>
 </html>

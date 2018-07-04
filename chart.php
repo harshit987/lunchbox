@@ -1,7 +1,10 @@
 
 <html><head>
 <style>
-
+#canvas{
+	
+	
+}
 </style>
 </head><body>
 
