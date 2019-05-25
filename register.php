@@ -26,7 +26,7 @@ if(($_SERVER['REQUEST_METHOD']=='POST')&&(isset($_POST['email']))){
 			$mail->Port ='465';
 			$mail->isHTML();
 			$mail->Username ='hrk27071999@gmail.com';
-			$mail->Password = 'h@ARSHIT000';
+			$mail->Password = '';
 			$mail->SetFrom('no-reply@chudap.com');
 			$mail->Subject = 'Lunchbox activation';
 			$mail->Body = 'copy and paste this link to activate account:   172.23.150.184/lunchbox_new/verification.php?uid='.$verlink;
